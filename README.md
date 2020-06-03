@@ -19,4 +19,5 @@ docker run --name training-db -e POSTGRES_USER=${username} -e POSTGRES_PASSWORD=
 ### migrate database schema
 Refer to flyway setup [documentation](https://flywaydb.org/documentation/migrations), find all[migration schema](src/main/resources/db/migrate)
 ```
+mvn clean compile flyway:mygrate
 ```

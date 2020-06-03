@@ -23,6 +23,7 @@ public class PlayerDaoTest {
 
     @Test
     public void getPlayerTest(){
+        //PlayerDao playerJDBCDao = new PlayerDao();
         List<Player> playerList = playerJDBCDao.getPlayers();
         assertEquals(2, playerList.size());
     }

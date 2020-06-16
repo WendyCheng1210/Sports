@@ -1,4 +1,4 @@
-/* docker run --name sportDB -e POSTGRES_DB=sport -e POSTGRES_USER=wendy -e POSTGRES_PASSWORD=password -p 521:5432 -d postgres */
+
 DROP TABLE IF EXISTS games cascade;
 DROP TABLE IF EXISTS players cascade;
 DROP TABLE IF EXISTS teams cascade;
@@ -25,8 +25,8 @@ CREATE TABLE players (
     name            VARCHAR(30),
     role_type       VARCHAR(30),
     salary          NUMERIC(10, 2),
-    hired_date      date default CURRENT_DATE,
-    team_id         BIGINT NOT NULL,
+    hired_year      INTEGER ,
+    team_id         BIGSERIAL NOT NULL,
 	FOREIGN KEY (team_id) REFERENCES teams (id)
 );
 

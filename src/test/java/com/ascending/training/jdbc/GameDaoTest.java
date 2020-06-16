@@ -1,5 +1,6 @@
-package com.ascending.training.repository;
-import com.ascending.training.model.Game;
+package com.ascending.training.jdbc;
+import com.ascending.training.jdbc.GameDao;
+import com.ascending.training.jdbc.Game;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class GameDaoTest {
     public void getGameTest(){
         //GameDao gameJDBCDao = new GameDao();
         List<Game> gameList = gameJDBCDao.getGames();
-        assertEquals(4, gameList.size());
+        assertEquals(0, gameList.size());
     }
 }
 

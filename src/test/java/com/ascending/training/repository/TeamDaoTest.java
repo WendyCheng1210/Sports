@@ -62,7 +62,6 @@ public class TeamDaoTest {
 
     @Test
     public void getTeamsTest() {
-
         List<Team> teams = teamDao.getTeams();
         int expectedNumOfTeam = 1;
 //      teams.forEach(dept -> System.out.println(dept));
@@ -84,7 +83,7 @@ public class TeamDaoTest {
     @Test(expected = HibernateException.class)
     public void getTeamByTest(){
         Team team = teamDao.getBy(t1.getId());
-        assertNull(team);
+        assertNotNull(team);
         assertEquals(team.getName(),t1.getName());
         System.out.println(team.getPlayers());
     }

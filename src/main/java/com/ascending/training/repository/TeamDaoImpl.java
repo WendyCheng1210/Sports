@@ -62,7 +62,18 @@ public class TeamDaoImpl implements TeamDao{
 
     @Override
     public Team getBy(long id) {
-        return null;
+        String hql = "From Team t where t.id =: Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            Query<Team> query = session.createQuery(hql);
+            query.setParameter("Id",id);
+            Team result = query.uniqueResult();
+            session.close();
+            return result;
+        }catch (HibernateException e){
+            logger.error("failure to get data record",e);
+            session.close();
+            return null;}
     }
 
     @Override
@@ -89,7 +100,6 @@ public class TeamDaoImpl implements TeamDao{
 
     @Override
     public Team getTeamEagerBy(long id) {
-        //        select * from teams as t left join players as p on a.employee_id=t.id where t.id=:Id
         String hql = "FROM Team t LEFT JOIN FETCH t.players where t.id=:Id";
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {

@@ -8,6 +8,7 @@ public interface TeamDao {
     Team save(Team team);
     List<Team> getTeams();
     Team getBy(long id);
-    boolean delete(Team dep);
     Team getTeamEagerBy(long id);
+    Team update(Team team);
+    boolean delete(Team team);
 }

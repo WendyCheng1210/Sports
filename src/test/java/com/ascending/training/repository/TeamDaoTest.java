@@ -1,5 +1,6 @@
 package com.ascending.training.repository;
 
+import com.ascending.training.ApplicationBootstrap;
 import com.ascending.training.model.Player;
 import com.ascending.training.model.Team;
 import org.hibernate.HibernateException;
@@ -7,16 +8,24 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class TeamDaoTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes= ApplicationBootstrap.class)
 
+public class TeamDaoTest {
+    @Autowired
     private TeamDao teamDao;
+    @Autowired
     private PlayerDao playerDao;
+
     private Team t1;
     private Player p1;
     private Player p2;
@@ -24,8 +33,8 @@ public class TeamDaoTest {
 
     @Before
     public void setUp() {
-        teamDao = new TeamDaoImpl();
-        playerDao = new PlayerDaoImpl();
+//        teamDao = new TeamDaoImpl();
+//        playerDao = new PlayerDaoImpl();
 
         t1 = new Team();
        // t1.setId(1000);
@@ -64,7 +73,6 @@ public class TeamDaoTest {
     public void getTeamsTest() {
         List<Team> teams = teamDao.getTeams();
         int expectedNumOfTeam = 1;
-//      teams.forEach(dept -> System.out.println(dept));
         Assert.assertEquals(expectedNumOfTeam, teams.size());
 
         List<Player> players = playerDao.getPlayers();

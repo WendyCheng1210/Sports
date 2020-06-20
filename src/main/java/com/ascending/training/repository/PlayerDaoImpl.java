@@ -1,7 +1,6 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Player;
-import com.ascending.training.model.Team;
 
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.HibernateException;
@@ -11,10 +10,12 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class PlayerDaoImpl implements PlayerDao{
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -22,9 +23,6 @@ public class PlayerDaoImpl implements PlayerDao{
     public Player save(Player player) {
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        //SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        //Session s = sessionFactory.openSession();
-        //s.save(player);
 
         try{
             transaction = session.beginTransaction();
@@ -59,7 +57,40 @@ public class PlayerDaoImpl implements PlayerDao{
     }
 
     @Override
-    public Player getBy(long id) {return null;
+    public Player getBy(long id) {
+        String hql = "From Player p where p.id = :Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            Query<Player> query = session.createQuery(hql);
+            query.setParameter("Id",id);
+            Player result = query.uniqueResult();
+            session.close();
+            return result;
+        }catch (HibernateException e){
+            logger.error("failure to get data record",e);
+            session.close();
+            return null;
+        }
+    }
+
+    @Override
+    public Player getPlayerEagerBy(long id) {
+        return null;
+    }
+
+    @Override
+    public Player update(Player player) {
+        Transaction transaction = null;
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(player);
+            transaction.commit();
+            return player;
+        }catch (Exception e){
+            if (transaction != null) transaction.rollback();
+            logger.error("failure to update record", e.getMessage());
+        }
+        return null;
     }
 
     @Override
@@ -70,7 +101,7 @@ public class PlayerDaoImpl implements PlayerDao{
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
             transaction = session.beginTransaction();
-            Query<Team> query = session.createQuery(hql);
+            Query<Player> query = session.createQuery(hql);
             query.setParameter("Id",player.getId());
             deletedCount = query.executeUpdate();
             transaction.commit();
@@ -83,5 +114,4 @@ public class PlayerDaoImpl implements PlayerDao{
         }
         return false;
     }
-
 }

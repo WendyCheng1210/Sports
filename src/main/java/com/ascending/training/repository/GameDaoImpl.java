@@ -1,7 +1,6 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Game;
-import com.ascending.training.model.Team;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -22,9 +21,6 @@ public class GameDaoImpl implements GameDao{
     public Game save(Game game) {
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
-//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//        Session s = sessionFactory.openSession();
-//        s.save(game);
 
         try{
             transaction = session.beginTransaction();
@@ -61,6 +57,32 @@ public class GameDaoImpl implements GameDao{
 
     @Override
     public Game getBy(long id) {
+        String hql = "From Game g where g.id =: Id";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            Query<Game> query = session.createQuery(hql);
+            query.setParameter("Id",id);
+            Game result = query.uniqueResult();
+            session.close();
+            return result;
+        }catch (HibernateException e){
+            logger.error("failure to get data record",e);
+            session.close();
+            return null;}
+    }
+
+    @Override
+    public Game update(Game game) {
+        Transaction transaction = null;
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(game);
+            transaction.commit();
+            return game;
+        }catch (Exception e){
+            if (transaction != null) transaction.rollback();
+            logger.error("failure to update record", e.getMessage());
+        }
         return null;
     }
 
@@ -72,7 +94,7 @@ public class GameDaoImpl implements GameDao{
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
             transaction = session.beginTransaction();
-            Query<Team> query = session.createQuery(hql);
+            Query<Game> query = session.createQuery(hql);
             query.setParameter("Id",game.getId());
             deletedCount = query.executeUpdate();
             transaction.commit();

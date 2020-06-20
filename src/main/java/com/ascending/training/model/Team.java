@@ -1,6 +1,5 @@
 package com.ascending.training.model;
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -27,10 +26,6 @@ public class Team {
 
     @Column(name = "formed_year")
     private Integer formed_year;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "game_id")
-//    private Game game;
 
     @OneToMany(mappedBy = "team",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Player> players;

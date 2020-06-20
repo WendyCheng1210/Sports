@@ -7,11 +7,11 @@ import java.util.Set;
 @Table(name = "games")
 public class Game {
     public Game(){}
-//    public Game(long id, String name, String location){
-//        this.id = id;
-//        this.name = name;
-//        this.location = location;
-//    }
+    public Game(long id, String name, String location){
+        this.id = id;
+        this.name = name;
+        this.location = location;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

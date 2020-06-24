@@ -11,10 +11,19 @@ import java.util.List;
 @Service
 public class TeamService {
 
-    private TeamDao teamDao;
     @Autowired
-    public Team save(Team team){ return teamDao.save(team);}
-    public List<Team> getTeams(Team team){return teamDao.getTeams();}
-    public Team update(Team team){return teamDao.update(team);}
-    public Team getBy(long Id){return teamDao.getBy(Id);}
+    private TeamDao teamDao;
+
+    public Team save(Team team){
+        return teamDao.save(team);
+    }
+    public List<Team> getTeams(){
+        return teamDao.getTeams();
+    }
+    public Team update(Team team){
+        return teamDao.update(team);
+    }
+    public Team getBy(long Id){
+        return teamDao.getBy(Id);
+    }
 }

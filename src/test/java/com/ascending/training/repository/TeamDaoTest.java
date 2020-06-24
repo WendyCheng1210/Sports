@@ -3,6 +3,7 @@ package com.ascending.training.repository;
 import com.ascending.training.ApplicationBootstrap;
 import com.ascending.training.model.Player;
 import com.ascending.training.model.Team;
+//import com.ascending.training.service.TeamService;
 import org.hibernate.HibernateException;
 import org.junit.After;
 import org.junit.Assert;
@@ -33,9 +34,6 @@ public class TeamDaoTest {
 
     @Before
     public void setUp() {
-//        teamDao = new TeamDaoImpl();
-//        playerDao = new PlayerDaoImpl();
-
         t1 = new Team();
        // t1.setId(1000);
         t1.setName("Golden State Warriors");
@@ -79,6 +77,13 @@ public class TeamDaoTest {
         int expectedNumOfPlayer = 2;
         Assert.assertEquals(expectedNumOfPlayer,players.size());
     }
+
+//    @Test
+//    public void getTeamsServiceTest() {
+//        List<Team> teams = teamService.getTeams();
+//        int expectedNumOfTeam = 1;
+//        Assert.assertEquals(expectedNumOfTeam, teams.size());
+//    }
 
     @Test
     public void getTeamEagerByTest(){

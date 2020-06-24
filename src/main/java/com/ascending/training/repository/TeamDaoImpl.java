@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -20,10 +21,14 @@ public class TeamDaoImpl implements TeamDao{
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
     public Team save(Team team) {
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
 
         try{
             transaction = session.beginTransaction();
@@ -43,7 +48,7 @@ public class TeamDaoImpl implements TeamDao{
     @Override
     public List<Team> getTeams() {
         String hql = "From Team";
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//      SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session s = sessionFactory.openSession();
         List<Team> result = new ArrayList<>();
 
@@ -61,7 +66,8 @@ public class TeamDaoImpl implements TeamDao{
     @Override
     public Team getBy(long id) {
         String hql = "From Team t where t.id =: Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try{
             Query<Team> query = session.createQuery(hql);
             query.setParameter("Id",id);
@@ -78,7 +84,8 @@ public class TeamDaoImpl implements TeamDao{
     @Override
     public Team getTeamEagerBy(long id) {
         String hql = "FROM Team t LEFT JOIN FETCH t.players where t.id=:Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try {
             Query<Team> query = session.createQuery(hql);
             query.setParameter("Id",id);
@@ -95,7 +102,8 @@ public class TeamDaoImpl implements TeamDao{
     @Override
     public Team update(Team team) {
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        //try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             transaction = session.beginTransaction();
             session.saveOrUpdate(team);
             transaction.commit();
@@ -112,7 +120,8 @@ public class TeamDaoImpl implements TeamDao{
         String hql = "DELETE Team as t where t.id = :Id";
         int deletedCount = 0;
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try{
             transaction = session.beginTransaction();
             Query<Team> query = session.createQuery(hql);

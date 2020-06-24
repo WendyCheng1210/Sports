@@ -8,13 +8,16 @@ import org.slf4j.LoggerFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.context.annotation.Bean;
+
 import java.util.Properties;
 
 public class HibernateUtil {
-    private static SessionFactory sessionFactory; // -> Singleton
-    private static Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
+    private SessionFactory sessionFactory; // -> Singleton
+    private Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
 
-    public static SessionFactory getSessionFactory(){
+
+    public SessionFactory getSessionFactory(){
         if (sessionFactory == null) {
             try {
                 String[] modelPackages = {"com.ascending.training.model"};
@@ -48,14 +51,14 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public static void main(String[] args){
-    SessionFactory sf = HibernateUtil.getSessionFactory();
-    SessionFactory sf2 = HibernateUtil.getSessionFactory();
-    logger.info("success generate sf" + sf.hashCode());
-    Session s = sf.openSession();
-    s.close();
-    Session s1 = sf2.openSession();
-    s1.close();
-    }
+//    public void main(String[] args){
+//    SessionFactory sf = HibernateUtil.getSessionFactory();
+//    SessionFactory sf2 = HibernateUtil.getSessionFactory();
+//    logger.info("success generate sf" + sf.hashCode());
+//    Session s = sf.openSession();
+//    s.close();
+//    Session s1 = sf2.openSession();
+//    s1.close();
+//    }
 
 }

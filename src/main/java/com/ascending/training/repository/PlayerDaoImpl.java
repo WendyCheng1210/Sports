@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -19,11 +20,14 @@ import java.util.List;
 public class PlayerDaoImpl implements PlayerDao{
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
     public Player save(Player player) {
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-
+        //Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try{
             transaction = session.beginTransaction();
             session.save(player);
@@ -42,8 +46,9 @@ public class PlayerDaoImpl implements PlayerDao{
     @Override
     public List<Player> getPlayers() {
         String hql = "FROM Player";
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        //SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session s = sessionFactory.openSession();
+        //Session s = sessionFactory.openSession();
         List<Player> result = new ArrayList<>();
         try{
             Query query = s.createQuery(hql);
@@ -59,7 +64,8 @@ public class PlayerDaoImpl implements PlayerDao{
     @Override
     public Player getBy(long id) {
         String hql = "From Player p where p.id = :Id";
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try{
             Query<Player> query = session.createQuery(hql);
             query.setParameter("Id",id);
@@ -81,7 +87,8 @@ public class PlayerDaoImpl implements PlayerDao{
     @Override
     public Player update(Player player) {
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        //try(Session session = HibernateUtil.getSessionFactory().openSession()){
+          try(Session session = sessionFactory.openSession()){
             transaction = session.beginTransaction();
             session.saveOrUpdate(player);
             transaction.commit();
@@ -98,7 +105,8 @@ public class PlayerDaoImpl implements PlayerDao{
         String hql = "DELETE Player as p where p.id = :Id";
         int deletedCount = 0;
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         try{
             transaction = session.beginTransaction();
             Query<Player> query = session.createQuery(hql);

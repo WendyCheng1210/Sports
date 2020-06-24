@@ -11,10 +11,10 @@ import java.util.List;
 @Service
 public class PlayerService {
 
-    private PlayerDao playerDao;
     @Autowired
+    private PlayerDao playerDao;
     public Player save(Player player){return playerDao.save(player);}
-    public List<Player> getPlayers(Player player){return playerDao.getPlayers();}
+    public List<Player> getPlayers(){return playerDao.getPlayers();}
     public Player update(Player player){return playerDao.update(player);}
     public Player getBy(long Id){return playerDao.getBy(Id);}
 }

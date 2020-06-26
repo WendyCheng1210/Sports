@@ -13,6 +13,10 @@ public class Team {
         this.formed_year = formed_year;
     }
 
+    public String toString(){
+        return "Team ID:" + id + " Name:" + name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

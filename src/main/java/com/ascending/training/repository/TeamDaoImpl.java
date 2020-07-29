@@ -65,7 +65,7 @@ public class TeamDaoImpl implements TeamDao{
 
     @Override
     public Team getBy(long id) {
-        String hql = "From Team t LEFT JOIN FETCH t.players where t.id =: Id";
+        String hql = "From Team as t LEFT JOIN FETCH t.players where t.id =: Id";
         //Session session = HibernateUtil.getSessionFactory().openSession();
         Session session = sessionFactory.openSession();
         try{
@@ -83,7 +83,7 @@ public class TeamDaoImpl implements TeamDao{
 
     @Override
     public Team getTeamEagerBy(long id) {
-        String hql = "FROM Team t LEFT JOIN FETCH t.players where t.id=:Id";
+        String hql = "FROM Team as t LEFT JOIN FETCH t.players where t.id=:Id";
         //Session session = HibernateUtil.getSessionFactory().openSession();
         Session session = sessionFactory.openSession();
         try {

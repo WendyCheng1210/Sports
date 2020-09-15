@@ -16,6 +16,7 @@ import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
+
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired

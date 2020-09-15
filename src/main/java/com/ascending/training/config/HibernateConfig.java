@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class HibernateConfig {
-
     @Bean
     public SessionFactory getHibernateSessionFactory(){
         HibernateUtil hibernateUtil = new HibernateUtil();

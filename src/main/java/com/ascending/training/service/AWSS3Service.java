@@ -1,17 +1,22 @@
 package com.ascending.training.service;
+
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.google.common.io.Files;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
-import com.google.common.io.Files;
 
 @Service
 public class AWSS3Service {
@@ -25,6 +30,24 @@ public class AWSS3Service {
     public AWSS3Service(@Autowired AmazonS3 amazonS3){
         this.amazonS3 = amazonS3;
     }
+
+//
+//    public AWSS3Service(){
+//        amazonS3 = getS3ClientWithSuppliedCredentials();
+//    }
+//
+//    private String myAWSAccessKeyId = System.getProperty("aws.accessKeyId");
+//    private String myAWSSecretKey = System.getProperty("aws.secretKey");
+//
+//    private AmazonS3 getS3ClientWithSuppliedCredentials() {
+//        BasicAWSCredentials awsCreds = new BasicAWSCredentials(myAWSAccessKeyId, myAWSSecretKey);
+//        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+//                .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+//                .withRegion("us-east-1")
+//                .build();
+//        return s3Client;
+//    }
+
 
     public void uploadFile(File f) throws IOException{
         PutObjectRequest request = new PutObjectRequest(bucketName, f.getName(),f);

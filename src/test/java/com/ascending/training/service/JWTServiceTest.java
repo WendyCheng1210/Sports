@@ -35,7 +35,7 @@ public class JWTServiceTest {
 
     @Test
     public void generateTokenTest(){
-        User user = userService.getUserByEmail("rhang@training.ascendingdc.com");
+        User user = userService.getUserByEmail("dwang@training.ascendingdc.com");
         String token = jwtService.generateToken(user);
         //assertion
         assertNotNull(token);

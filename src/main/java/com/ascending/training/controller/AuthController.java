@@ -14,7 +14,6 @@ import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 @RestController
 public class AuthController {
     @Autowired private UserService userService;
@@ -25,8 +24,6 @@ public class AuthController {
     private String tokenType = "Bearer";
 
     private Logger logger = LoggerFactory.getLogger(getClass());
-
-
 
     //http://localhost:8080/auth
     //{
@@ -45,6 +42,5 @@ public class AuthController {
         }
         return null;
     }
-
 }
 

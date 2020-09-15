@@ -84,7 +84,6 @@ public class SecurityFilter implements Filter{
         return statusCode;
     }
 
-
     @Override
     public void destroy() {
 

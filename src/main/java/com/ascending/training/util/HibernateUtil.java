@@ -60,5 +60,4 @@ public class HibernateUtil {
 //    Session s1 = sf2.openSession();
 //    s1.close();
 //    }
-
 }

@@ -46,7 +46,7 @@ public class AWSS3ServiceTest {
 
     @Test
     public void uploadFileTest() throws IOException {
-        awss3Service.uploadFile(new File("/Users/Wendy/Desktop/Yanwen(Wendy) Cheng resume.pdf"));//不需要真实的文件，behavior verification是测试逻辑
+        awss3Service.uploadFile(new File("/Users/Wendy/Desktop/Yanwen(Wendy) Cheng resume.pdf"));//behavior verification
         verify(client,times(1)).putObject(any(PutObjectRequest.class));
     }
 
@@ -55,11 +55,11 @@ public class AWSS3ServiceTest {
 //    when(mock.get(anyInt())).thenReturn(null);
 //    doThrow(new RuntimeException()).when(mock).someVoidMethod(anyObject());
 //    verify(mock).someMethod(contains("foo"))
-    @Test
-    public void getUrlTest(){
-        when(client.getUrl(anyString(),anyString())).thenReturn(mock(URL.class));
-        awss3Service.getUrl("WendyCheng");
-        verify(client,times(1)).getUrl(anyString(),anyString());
-    }
+//    @Test
+////    public void getUrlTest(){
+////        when(client.getUrl(anyString(),anyString())).thenReturn(mock(URL.class));
+////        awss3Service.getUrl("WendyCheng");
+////        verify(client,times(1)).getUrl(anyString(),anyString());
+////    }
 
 }

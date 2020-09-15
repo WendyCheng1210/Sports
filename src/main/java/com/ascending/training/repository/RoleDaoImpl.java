@@ -15,6 +15,7 @@ import java.util.List;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
+
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired

@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class RoleService {
+
     @Autowired
     private RoleDao roleDao;
 
@@ -19,5 +20,4 @@ public class RoleService {
         List<Role> roleList = roleDao.findAllRoles();
         return roleList;
     }
-
 }

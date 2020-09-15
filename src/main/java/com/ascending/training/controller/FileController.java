@@ -19,7 +19,6 @@ public class FileController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-
     // http://localhost:8080/files
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String uploadFile(@RequestParam("file") MultipartFile file){
@@ -33,8 +32,8 @@ public class FileController {
     }
 
     @RequestMapping(value = "",method = RequestMethod.GET)
-    public String getObject(@PathVariable("fileName") String filename){
-        return awss3Service.getUrl(filename);
+    public String getObject(@RequestParam("fileName") String s3Key){
+        return awss3Service.getUrl(s3Key);
     }
 
 }

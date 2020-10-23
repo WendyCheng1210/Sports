@@ -1,4 +1,4 @@
-## Overview 
+## NBA Sport 
 This is the project for the NBA basket ball games. We will deal with the game operation system.
 
 ### Project Technical Overview:
